@@ -7,6 +7,8 @@ import java.rmi.RemoteException;
  * mining new blocks and add them into the peer-to-peer blockchain network.
  */
 public class Node implements MessageHandling {
+    private static int difficulty = 20;
+
     private int id;
     private static TransportLib lib;
     private int num_peers;
@@ -26,6 +28,8 @@ public class Node implements MessageHandling {
         wallet = 0;
         this.num_peers = num_peers;
         //TODO: instantiate your blockchain implementation and set the difficulty to 20.
+
+        blockChainManager = new BlockChain(difficulty, id);
     }
 
     /**
