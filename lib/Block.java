@@ -1,9 +1,11 @@
 package lib;
 
+import java.io.Serializable;
+
 /**
  * Block Class, the element to compose a Blockchain.
  */
-public class Block {
+public class Block implements Serializable {
 
     private String hash;
 
@@ -63,8 +65,24 @@ public class Block {
         return timestamp;
     }
 
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public static Block fromString(String s){
+        String[] attrs = s.split(",");
+        if (attrs.length == 5) {
+            String hash = attrs[0];
+            String prevHash = attrs[1];
+            String data = attrs[2];
+            long nounce = Long.parseLong(attrs[3]);
+            long timestamp = Long.parseLong(attrs[4]);
+            Block result = new Block(hash, prevHash, data, timestamp);
+            result.setDifficulty(20);
+            result.setNonce(nounce);
+            return result;
+        }
+
         return null;
     }
 
