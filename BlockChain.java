@@ -34,7 +34,6 @@ public class BlockChain implements BlockChainBase{
 
     @Override
     public boolean addBlock(Block block) {
-//        Block prevBlock = blockChain.get(blockChain.size()-1);
         int length = blockChain.size();
         for (int i = length-1; i >= 0; --i) {
             Block prevBlock = blockChain.get(i);
@@ -117,6 +116,7 @@ public class BlockChain implements BlockChainBase{
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void downloadBlockchain() {
         int peer_num = node.getPeerNumber();
         for (int i = 0; i < peer_num; ++i) {
@@ -131,6 +131,7 @@ public class BlockChain implements BlockChainBase{
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     }
+
                     List<Block> chain = (List<Block>)object;
                     if (blockChain.size() != 0) {
                         if (chain.size() > blockChain.size()){
@@ -149,7 +150,7 @@ public class BlockChain implements BlockChainBase{
 
     @Override
     public void setNode(Node node) {
-
+        this.node = node;
     }
 
     @Override

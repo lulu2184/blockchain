@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class Block implements Serializable {
 
+    private static final long serialVersionUID = 234158L;
+
     private String hash;
 
     private String previousHash;
@@ -69,6 +71,11 @@ public class Block implements Serializable {
         this.timestamp = timestamp;
     }
 
+    /**
+     * Reconstruct Block from string. Attributes are separated by commas.
+     * @param s input string
+     * @return Reconstructed Block.
+     */
     public static Block fromString(String s){
         String[] attrs = s.split(",");
         if (attrs.length == 5) {
